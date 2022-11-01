@@ -7,7 +7,7 @@
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-<base href="{{asset('')}}">
+<base href="{{ asset('') }}">
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/user/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/user/font-awesome.min.css" type="text/css">
