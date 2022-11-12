@@ -8,7 +8,9 @@
 
 <body>
     <!-- Including the main component -->
-    @include('user_menu')
+    @include('topnav')
+    {{-- Include everythings else --}}
+    @yield('user_content')
     <!-- Including the footer -->
     @include('footer')
     <!-- Include Script -->

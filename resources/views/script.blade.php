@@ -1,13 +1,13 @@
 <!-- Js Plugins -->
-<script src="js/user/jquery-3.3.1.min.js" defer></script>
-<script src="js/user/bootstrap.min.js" defer></script>
-<script src="js/user/jquery-ui.min.js" defer></script>
-<script src="js/user/jquery.countdown.min.js" defer></script>
-<script src="js/user/jquery.nice-select.min.js" defer></script>
-<script src="js/user/jquery.zoom.min.js" defer></script>
-<script src="js/user/jquery.dd.min.js" defer></script>
-<script src="js/user/jquery.slicknav.js" defer></script>
-<script src="js/user/owl.carousel.min.js" defer></script>
+<script src="js/user/jquery-3.3.1.min.js"></script>
+<script src="js/user/bootstrap.min.js"></script>
+<script src="js/user/jquery-ui.min.js"></script>
+<script src="js/user/jquery.countdown.min.js"></script>
+<script src="js/user/jquery.nice-select.min.js"></script>
+<script src="js/user/jquery.zoom.min.js"></script>
+<script src="js/user/jquery.dd.min.js"></script>
+<script src="js/user/jquery.slicknav.js"></script>
+<script src="js/user/owl.carousel.min.js"></script>
 <script src="js/user/main.js"></script>
 <script>
     // $(document).ready(function(){
