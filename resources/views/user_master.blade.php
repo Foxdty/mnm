@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
+    
     <!-- Include CSS -->
     @include('head')
+
 </head>
 
 <body>
