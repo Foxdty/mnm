@@ -157,9 +157,9 @@ Route::post('checkout', [CartController::class,'getCheckoutListUserPage'])->name
 
 Route::get('checkout', CartController::class,'getCheckoutListUserPage');
 
-// Route::post('checkVoucher',[CheckoutController::class,'checkVoucher',])->name('kiem-tra-voucher');
+Route::post('checkVoucher',[CheckoutController::class,'checkVoucher',])->name('kiem-tra-voucher');
 
-// Route::post('order',[CheckoutController::class,'postOrder',])->name('kiem-tra-voucher');
+Route::post('order',[CheckoutController::class,'postOrder',])->name('kiem-tra-voucher');
 
 
 //------------------------------- Blog----------------------//
@@ -185,3 +185,82 @@ Route::get('ad_slideeditpage/{id_slide}', [SlideController::class,'getEditSlide'
 Route::post('update_slide/{id_slide}', [SlideController::class,'postUpdateSlide'])->name('sua-slide');
 
 Route::get('delete_slide', [SlideController::class,'getDeleteSlide'])->name('xoa-slide');
+
+//-------------||||------------------START Voucher----------------------//
+//--------Admin------
+Route::get('ad_voucherpage', [
+    'as' => 'danh-sach-giam-gia',
+    'uses' => 'App\Http\Controllers\PageController@getVoucherList'
+]);
+
+Route::get('ad_vouchereditpage', function () {
+    return view('adminpage.ad_vouchereditpage');
+});
+
+Route::post('ad_vouchereditpage', [
+    'as' => 'them-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@postInsertVoucher'
+]);
+
+Route::get('ad_vouchereditpage/{id_voucher}', [
+    'as' => 'chi-trang-voucher-edit',
+    'uses' => 'App\Http\Controllers\VoucherController@getEditVoucher'
+]);
+
+Route::post('update_voucher/{id_voucher}', [
+    'as' => 'chinh-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@postUpdateVoucher'
+]);
+
+Route::get('delete_voucher', [
+    'as' => 'xoa-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@getDeleteVoucher'
+]);
+
+//-------------V----------------------------
+Route::get('ad_voucherpage', [
+    'as' => 'danh-sach-giam-gia',
+    'uses' => 'App\Http\Controllers\PageController@getVoucherList'
+]);
+
+Route::get('ad_vouchereditpage', function () {
+    return view('adminpage.ad_vouchereditpage');
+});
+
+Route::post('ad_vouchereditpage', [
+    'as' => 'them-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@postInsertVoucher'
+]);
+
+Route::get('ad_vouchereditpage/{id_voucher}', [
+    'as' => 'chi-trang-voucher-edit',
+    'uses' => 'App\Http\Controllers\VoucherController@getEditVoucher'
+]);
+
+Route::post('update_voucher/{id_voucher}', [
+    'as' => 'chinh-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@postUpdateVoucher'
+]);
+
+Route::get('delete_voucher', [
+    'as' => 'xoa-voucher',
+    'uses' => 'App\Http\Controllers\VoucherController@getDeleteVoucher'
+]);
+
+//-----------|||||--------------------START COMMENT----------------------//
+Route::get('ad_commentpage', [
+    'as' => 'danh-sach-binh-luan',
+    'uses' => 'App\Http\Controllers\CommentController@getCommentList'
+]);
+Route::post('reply_comment/{id_comment}', [
+    'as' => 'tra-loi-binh-luan',
+    'uses' => 'App\Http\Controllers\CommentController@postReplyComment'
+]);
+Route::get('delete-comment', [
+    'as' => 'xoa-comment',
+    'uses' => 'App\Http\Controllers\CommentController@getDeteleComment'
+]);
+Route::post('comment_user', [
+    'as' => 'them-comment-user-page',
+    'uses' => 'App\Http\Controllers\CommentController@postInsertComment'
+]);
