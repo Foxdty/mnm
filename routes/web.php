@@ -10,6 +10,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\CkeditorController;
+use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\CommentController;
+
 
 
 
@@ -140,7 +144,7 @@ Route::get('ad_manufacturer', [ManufacturerController::class,'postDelete'])->nam
 Route::get('ad_manufacturer/{id}', [ManufacturerController::class,'getEdit'])->name('edit-manufacturer');
 
 
-//------------------------USER_CART START-------------------------
+//------------------------USER_CART -------------------------
 
 Route::get('cart', CartController::class,'getCart');
 
@@ -152,7 +156,7 @@ Route::post('delFromCart/{id}',[CartController::class,'delFromCart',])->name('xo
 
 Route::get('delFromCart/{id}',[CartController::class,'delFromCart',])->name('xoa-gio-hang');
 
-//------------------------------- Checkout----------------------//
+//------------------------------- Checkout----------------------
 Route::post('checkout', [CartController::class,'getCheckoutListUserPage'])->name('cart-checkout-userpage');
 
 Route::get('checkout', CartController::class,'getCheckoutListUserPage');
@@ -162,7 +166,7 @@ Route::post('checkVoucher',[CheckoutController::class,'checkVoucher',])->name('k
 Route::post('order',[CheckoutController::class,'postOrder',])->name('kiem-tra-voucher');
 
 
-//------------------------------- Blog----------------------//
+//------------------------------- Blog----------------------
 Route::get('blog', [PageController::class,'getBlogListUserPage'])->name('danh-sach-bai-viet-userpage');
 
 Route::get('blog_details', function () {
@@ -171,7 +175,7 @@ Route::get('blog_details', function () {
 Route::get('blog_details/{id_blog}', [BlogController::class,'getBlogDetailUserPage'])->name('chi-bai-viet-userpage');
 
 
-//------------------------------- Slider----------------------//
+//------------------------------- Slider----------------------
 Route::get('ad_slidepage', [PageController::class,'getSlideList'])->name('danh-sach-slide');
 
 Route::get('ad_slideeditpage', function () {
@@ -186,81 +190,39 @@ Route::post('update_slide/{id_slide}', [SlideController::class,'postUpdateSlide'
 
 Route::get('delete_slide', [SlideController::class,'getDeleteSlide'])->name('xoa-slide');
 
-//-------------||||------------------START Voucher----------------------//
-//--------Admin------
-Route::get('ad_voucherpage', [
-    'as' => 'danh-sach-giam-gia',
-    'uses' => 'App\Http\Controllers\PageController@getVoucherList'
-]);
+//------------------------------- Voucher----------------------
+//--------Admin-------------------------------
+Route::get('ad_voucherpage', [PageController::class,'getVoucherList'])->name('danh-sach-giam-gia');
 
 Route::get('ad_vouchereditpage', function () {
     return view('adminpage.ad_vouchereditpage');
 });
 
-Route::post('ad_vouchereditpage', [
-    'as' => 'them-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@postInsertVoucher'
-]);
+Route::post('ad_vouchereditpage', [VoucherController::class,'postInsertVoucher'])->name('them-voucher');
 
-Route::get('ad_vouchereditpage/{id_voucher}', [
-    'as' => 'chi-trang-voucher-edit',
-    'uses' => 'App\Http\Controllers\VoucherController@getEditVoucher'
-]);
+Route::get('ad_vouchereditpage/{id_voucher}', [VoucherController::class,'getEditVoucher'])->name('chi-trang-voucher-edit');
 
-Route::post('update_voucher/{id_voucher}', [
-    'as' => 'chinh-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@postUpdateVoucher'
-]);
+Route::post('update_voucher/{id_voucher}', [VoucherController::class,'postUpdateVoucher'])->name('chinh-voucher');
 
-Route::get('delete_voucher', [
-    'as' => 'xoa-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@getDeleteVoucher'
-]);
+Route::get('delete_voucher', [VoucherController::class,'getDeleteVoucher'])->name('xoa-voucher');
 
 //-------------V----------------------------
-Route::get('ad_voucherpage', [
-    'as' => 'danh-sach-giam-gia',
-    'uses' => 'App\Http\Controllers\PageController@getVoucherList'
-]);
+Route::get('ad_voucherpage', [PageController::class,'getVoucherList'])->name('danh-sach-giam-gia');
 
 Route::get('ad_vouchereditpage', function () {
     return view('adminpage.ad_vouchereditpage');
 });
 
-Route::post('ad_vouchereditpage', [
-    'as' => 'them-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@postInsertVoucher'
-]);
+Route::post('ad_vouchereditpage', [VoucherController::class,'postInsertVoucher'])->name('ad_vouchereditpage');
 
-Route::get('ad_vouchereditpage/{id_voucher}', [
-    'as' => 'chi-trang-voucher-edit',
-    'uses' => 'App\Http\Controllers\VoucherController@getEditVoucher'
-]);
+Route::get('ad_vouchereditpage/{id_voucher}', [VoucherController::class,'getEditVoucher'])->name('chi-trang-voucher-edit');
 
-Route::post('update_voucher/{id_voucher}', [
-    'as' => 'chinh-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@postUpdateVoucher'
-]);
+Route::post('update_voucher/{id_voucher}', [VoucherController::class,'postUpdateVoucher'])->name('chinh-voucher');
 
-Route::get('delete_voucher', [
-    'as' => 'xoa-voucher',
-    'uses' => 'App\Http\Controllers\VoucherController@getDeleteVoucher'
-]);
+Route::get('delete_voucher', [VoucherController::class,'getDeleteVoucher'])->name('xoa-voucher');
 
-//-----------|||||--------------------START COMMENT----------------------//
-Route::get('ad_commentpage', [
-    'as' => 'danh-sach-binh-luan',
-    'uses' => 'App\Http\Controllers\CommentController@getCommentList'
-]);
-Route::post('reply_comment/{id_comment}', [
-    'as' => 'tra-loi-binh-luan',
-    'uses' => 'App\Http\Controllers\CommentController@postReplyComment'
-]);
-Route::get('delete-comment', [
-    'as' => 'xoa-comment',
-    'uses' => 'App\Http\Controllers\CommentController@getDeteleComment'
-]);
-Route::post('comment_user', [
-    'as' => 'them-comment-user-page',
-    'uses' => 'App\Http\Controllers\CommentController@postInsertComment'
-]);
+//------------------------------- COMMENT----------------------//
+Route::get('ad_commentpage', [CommentController::class,'getCommentList'])->name('danh-sach-binh-luan');
+Route::post('reply_comment/{id_comment}', [CommentController::class,'postReplyComment'])->name('tra-loi-binh-luan');
+Route::get('delete-comment', [CommentController::class,'getDeteleComment'])->name('xoa-comment');
+Route::post('comment_user', [CommentController::class,'postInsertComment'])->name('them-comment-user-page');
