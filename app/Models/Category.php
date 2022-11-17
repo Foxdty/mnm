@@ -17,9 +17,17 @@ class Category extends Model
         'type',
         'status'
     ];
+
+
     /// khi insert vô db với hàm save() thì migration nó báo lỗi với created_at, thêm dòng sau để tắt nó đi
     public $timestamps = false;
-    /// 1 category có nhiều product nên ->hasMany
+
+    // 1 Category có nhiều blog dùng hasMany( class, 'khoa ngoai', 'khoa chinh')
+    public function blogs()
+    {
+        return $this->hasMany('App\Models\Blog', 'id_category', 'id_category');
+    }
+
     public function product()
     {
         return $this->hasMany('App\Models\Blog', 'id_category', 'id_category');
@@ -29,5 +37,4 @@ class Category extends Model
     {
         return $this->hasOne(Category::class);
     }
-
 }
