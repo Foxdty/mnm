@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\ImageUpload;
 use App\Models\ImageProduct;
+use App\Models\ImageUpload;
+use App\Models\Manufacturer;
 use App\Models\ProductDetail;
+use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ProductController extends Controller
 {
@@ -180,4 +183,23 @@ class ProductController extends Controller
         Product::find($request->id_product)->update(['status' => '0']);
         return redirect('ad_Product');
     }
+    //// Chưa bỏ /.///////////////////////////
+    public function findByCategory($category)
+    {
+        $category = Category::where('category_name', $category)->first();
+        $list_product = Product::with('image_product')->where('status', '<>', 0)->where('id_category', $category->id_category)->get();
+        $categories = Category::where(['type' => 0])->get();
+        $manufacturers = Manufacturer::all();
+        return view('userpage.user_shop', compact('list_product', 'categories', 'manufacturers'));
+    }
+
+    public function findByManufacturer($manufacturer)
+    {
+        $manufacturer = Manufacturer::where('manufacturer', $manufacturer)->first();
+        $list_product = Product::with('image_product')->where('status', '<>', 0)->Where('id_manufacturer', $manufacturer->id_manufacturer)->get();
+        $categories = Category::where(['type' => 0])->get();
+        $manufacturers = Manufacturer::all();
+        return view('userpage.user_shop', compact('list_product', 'categories', 'manufacturers'));
+    }
+    ////////////////////////////////////////
 }
