@@ -12,6 +12,7 @@ class Product extends Model
     protected $primaryKey = "id_product";
     public $timestamps = false;
 
+
     protected $fillable = [
         // 'id_product',
         'id_category',
@@ -37,4 +38,16 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductDetail', 'id_product', 'id_product');
     }
+
+    public function image_product()
+    {
+        return $this->hasMany(ImageProduct::class, 'id_product', 'id_product');
+    }
+
+
+    public function manufacturer()
+    {
+        return $this->belongsTo(Manufacturer::class, 'id_manufacturer', 'id_manufacturer');
+    }
+ 
 }
