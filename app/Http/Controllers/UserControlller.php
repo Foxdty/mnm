@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\ImageUpload;
-class UserControlller extends Controller
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
+class UserController extends Controller
 {
     ///////////// Đăng ký ///////////////////////
     public function postRegister(Request $req)
@@ -33,6 +35,7 @@ class UserControlller extends Controller
                 're_password.same' => 'Re Password not match !'
             ]
         );
+
         $u = new User();
 
         $u->user_name = $req->name;
@@ -51,13 +54,38 @@ class UserControlller extends Controller
         $u->save();
 
 
+        // DB::table('users')->insert(
+        //     [
+        //         'user_name' =>  $req->name,
+        //         'address' =>  $req->address,
+        //         'phone' =>  $req->phone,
+        //         'email' =>  $req->email,
+        //         'password' =>  Hash::make($req->password),
+        //         'avatar' =>  'UNDONE',
+        //         'gender' => $req->rd_gioitinh,
+        //         'role' =>  'user',
+        //         'status' => 1
+        //     ]
+        // );
+
+
+
         return redirect()->back()->with('register_status', 'Register Success');
+        // $user->email = $request->email;
+        // $user->password = $request->password;
+
+        // $user->save();
+        // return redirect()->route('login')->with('success','dang ky thanh cong');
+
+
     }
 
+    /////////////// Đăng nhập //////////////////////////
     public function getLogin()
     {
         return view('userpage.user_login');
     }
+
     public function postLogin(Request $request)
     {
         $this->validate(
@@ -77,6 +105,7 @@ class UserControlller extends Controller
             'email' => $request->email,
             'password' => $request->passWord,
         ];
+
         if (Auth::attempt($data)) {
             $user = User::where('email', $request->email)->first();
             Auth::login($user);
@@ -220,5 +249,4 @@ class UserControlller extends Controller
 
         return redirect()->back()->with('userEdit_status', 'Data Update');
     }
-    
 }

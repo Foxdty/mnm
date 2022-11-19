@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
 use App\Models\ProductDetail;
+use Illuminate\Http\Request;
+
 class ProductDetailController extends Controller
 {
     public function getPrice(Request $request, $id)
