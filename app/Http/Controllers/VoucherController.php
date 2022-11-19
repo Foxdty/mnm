@@ -101,4 +101,5 @@ class VoucherController extends Controller
         $v->delete();
         return redirect('ad_voucherpage');
     }
+    //
 }
